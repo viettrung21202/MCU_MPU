@@ -94,23 +94,24 @@ int main(void)
   int counter = 0;
   while (1)
   {
-	 counter ++;
-	 if (counter <= 2)
-	 {
-		 HAL_GPIO_WritePin ( LED_RED_GPIO_Port , LED_RED_Pin ,GPIO_PIN_RESET );
-		 HAL_GPIO_WritePin ( LED_YELLOW_GPIO_Port , LED_YELLOW_Pin ,GPIO_PIN_SET );
-	 }
-	 else
-	 {
-		 HAL_GPIO_WritePin ( LED_RED_GPIO_Port , LED_RED_Pin ,GPIO_PIN_SET );
-		 HAL_GPIO_WritePin ( LED_YELLOW_GPIO_Port , LED_YELLOW_Pin ,GPIO_PIN_RESET );
-	 }
-	 if (counter >= 4)
-	 {
-		 counter = 0;
-	 }
-
-	 HAL_Delay (1000) ;
+	  switch (counter++)
+	  {
+		case 0:
+			 HAL_GPIO_WritePin ( LED_RED_GPIO_Port , LED_RED_Pin ,GPIO_PIN_RESET );
+			 HAL_GPIO_WritePin ( LED_YELLOW_GPIO_Port , LED_YELLOW_Pin ,GPIO_PIN_SET );
+			break;
+		case 1:
+			 HAL_GPIO_WritePin ( LED_RED_GPIO_Port , LED_RED_Pin ,GPIO_PIN_SET );
+			 HAL_GPIO_WritePin ( LED_YELLOW_GPIO_Port , LED_YELLOW_Pin ,GPIO_PIN_RESET );
+			break;
+		default:
+			break;
+	  }
+	  if (counter > 1)
+	  {
+		  counter=0;
+	  }
+	  HAL_Delay (2000);
 
     /* USER CODE END WHILE */
 
